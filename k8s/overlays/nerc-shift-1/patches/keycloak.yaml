@@ -1,0 +1,41 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  name: mss-keycloak
+  namespace: keycloak
+  labels:
+    app: mss-keycloak
+spec:
+  instances: 1
+  keycloakDeploymentSpec:
+    experimental:
+      env:
+        - name: DB_ADDR
+          valueFrom:
+            secretKeyRef:
+              name: mss-keycloak-pgha-pguser-mss-keycloak-pgha
+              key: host
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: mss-keycloak-pgha-pguser-mss-keycloak-pgha
+              key: port
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mss-keycloak-pgha-pguser-mss-keycloak-pgha
+              key: dbname
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mss-keycloak-pgha-pguser-mss-keycloak-pgha
+              key: user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mss-keycloak-pgha-pguser-mss-keycloak-pgha
+              key: password
+  externalDatabase:
+    enabled: true
+  externalAccess:
+    enabled: true

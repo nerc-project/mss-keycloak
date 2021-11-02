@@ -1,0 +1,8 @@
+namespace: keycloak
+resources:
+  - ha-postgres.yaml
+  - ../../base
+  - keycloakrealm.yaml
+
+patchesStrategicMerge:
+  - patches/keycloak.yaml
