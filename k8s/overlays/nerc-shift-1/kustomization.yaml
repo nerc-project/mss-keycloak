@@ -3,6 +3,8 @@ resources:
   - ha-postgres.yaml
   - ../../base
   - keycloakrealm.yaml
+  - keycloak-tls-secret.yaml
+  - ingress.yaml
 
 patchesStrategicMerge:
   - patches/keycloak.yaml
