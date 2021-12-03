@@ -1,0 +1,15 @@
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: keycloak-cilogon-idp-secret
+  namespace: keycloak
+spec:
+  target:
+    name: keycloak-cilogon-idp-secret
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-backend
+    kind: ClusterSecretStore
+  dataFrom:
+    - key: keycloak/idp/cilogon
