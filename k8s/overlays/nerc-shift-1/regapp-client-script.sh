@@ -40,6 +40,7 @@ else
 
     # Update cilogon clientId and clientSecret
     # sed replace needs to be clean of \ / and &
+    # jq would be much better but not available in stock image
     CISEC=$(printf '%s\n' "$CILOGON_CLIENT_SECRET" | sed -e 's/[\/&]/\\&/g')
     CIID=$(printf '%s\n' "$CILOGON_CLIENT_ID" | sed -e 's/[\/&]/\\&/g')
     CILOGON_IDP_REP=$($CLI get realms/mss/identity-provider/instances/cilogon | sed -e "s/\"clientSecret.*,/\"clientSecret\": \"$CISEC\",/g" -e "s/\"clientId.*,/\"clientId\": \"$CIID\",/g")
@@ -51,6 +52,6 @@ else
     REDIRECTOR_KCID=$($CLI get realms/mss/authentication/flows/browser/executions  --format csv --fields id,displayName --noquotes | sed -n 's/\(.*\),Identity Provider Redirector.*/\1/p')
     $CLI create realms/mss/authentication/executions/$REDIRECTOR_KCID/config --body $REDIRECTOR_CONFIG
 
-    # Example update - note this command cannot change client id!!
+    # Example update
     # $CLI update realms/mss/clients/$REGAPP_CLIENT_ID  -s description=supersuccesssuperdude
 fi
