@@ -3,8 +3,18 @@ resources:
   - ha-postgres.yaml
   - ../../base
   - keycloakrealm.yaml
+  - regapp-client.yaml
   - keycloak-tls-secret.yaml
+  - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
 patchesStrategicMerge:
   - patches/keycloak.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+  
+configMapGenerator:
+  - name: regapp-client-script
+    files:
+    - regapp-client-script.sh

@@ -10,6 +10,16 @@ spec:
   keycloakDeploymentSpec:
     experimental:
       env:
+        - name: CILOGON_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: CLIENT_ID
+              name: keycloak-cilogon-idp-secret
+        - name: CILOGON_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: CLIENT_SECRET
+              name: keycloak-cilogon-idp-secret
         - name: DB_ADDR
           valueFrom:
             secretKeyRef:
@@ -35,6 +45,26 @@ spec:
             secretKeyRef:
               name: mss-keycloak-pgha-pguser-mss-keycloak-pgha
               key: password
+      volumes:
+        defaultMode: 0777
+        items:
+          # - name: cilogon-idp-secret
+          #   secrets:
+          #     - keycloak-cilogon-idp-secret
+          #   # $JBOSS_HOME/secrets - supported by kc container
+          #   # reference in keycloak as ${vault.cilogon_client_secret}
+          #   mountPath: /opt/jboss/keycloak/secrets
+          #   items:
+          #     - key: CLIENT_SECRET
+          #       path: mss_cilogon__client__secret
+          - name: regapp-client-script
+            configMaps:
+              - regapp-client-script
+            mountPath: /opt/jboss/startup-scripts
+            items:
+              - key: regapp-client-script.sh
+                path: regapp-client-script.sh
+                mode: 0777
   externalDatabase:
     enabled: true
   externalAccess:
