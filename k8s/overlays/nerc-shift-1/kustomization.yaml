@@ -1,10 +1,11 @@
 namespace: keycloak
 resources:
+  - secrets/pgo-s3-conf.yaml
   - ha-postgres.yaml
   - ../../base
   - keycloakrealm.yaml
   - regapp-client.yaml
-  - keycloak-tls-secret.yaml
+  - secrets/keycloak-tls.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
