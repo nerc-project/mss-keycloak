@@ -16,8 +16,8 @@ patchesStrategicMerge:
 
 generatorOptions:
   disableNameSuffixHash: true
-  
+
 configMapGenerator:
-  - name: regapp-client-script
+  - name: nerc-setup.sh
     files:
-    - regapp-client-script.sh
+    - nerc-setup.sh
