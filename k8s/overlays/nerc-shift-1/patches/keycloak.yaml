@@ -57,13 +57,13 @@ spec:
           #   items:
           #     - key: CLIENT_SECRET
           #       path: mss_cilogon__client__secret
-          - name: regapp-client-script
+          - name: nerc-setup
             configMaps:
-              - regapp-client-script
+              - nerc-setup
             mountPath: /opt/jboss/startup-scripts
             items:
-              - key: regapp-client-script.sh
-                path: regapp-client-script.sh
+              - key: nerc-setup.sh
+                path: nerc-setup.sh
                 mode: 0777
   externalDatabase:
     enabled: true

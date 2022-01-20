@@ -1,10 +1,9 @@
 apiVersion: keycloak.org/v1alpha1
 kind: KeycloakClient
 metadata:
-  name: regapp-client
-  namespace: regapp
+  name: coldfront-client
   labels:
-    client: regapp-client
+    client: coldfront-client
 spec:
   realmSelector:
     matchLabels:
@@ -35,7 +34,7 @@ spec:
       tls.client.certificate.bound.access.tokens: "false"
       use.refresh.tokens: "true"
     clientAuthenticatorType: client-secret
-    clientId: regapp
+    clientId: coldfront
     defaultClientScopes:
     - web-origins
     - roles
@@ -100,8 +99,48 @@ spec:
       name: Client ID
       protocol: openid-connect
       protocolMapper: oidc-usersessionmodel-note-mapper
+    - config:
+        access.token.claim: "false"
+        claim.name: uid
+        id.token.claim: "true"
+        jsonType.label: String
+        user.attribute: username
+        userinfo.token.claim: "true"
+      name: uid
+      protocol: openid-connect
+      protocolMapper: oidc-usermodel-property-mapper
+    - config:
+        access.token.claim: "false"
+        claim.name: first
+        id.token.claim: "true"
+        jsonType.label: String
+        user.attribute: firstName
+        userinfo.token.claim: "true"
+      name: first
+      protocol: openid-connect
+      protocolMapper: oidc-usermodel-property-mapper
+    - config:
+        access.token.claim: "false"
+        claim.name: last
+        id.token.claim: "true"
+        jsonType.label: String
+        user.attribute: lastName
+        userinfo.token.claim: "true"
+      name: last
+      protocol: openid-connect
+      protocolMapper: oidc-usermodel-property-mapper
+    - config:
+        full.path: "false"
+        id.token.claim: "true"
+        access.token.claim: "false"
+        claim.name: groups
+        userinfo.token.claim: "true"
+      name: groups
+      protocol: openid-connect
+      protocolMapper: oidc-group-membership-mapper
+      consentRequired: false
     publicClient: false
     redirectUris:
-    - https://regapp.mss.mghpcc.org/*
+    - https://coldfront.mss.mghpcc.org/*
     serviceAccountsEnabled: true
     standardFlowEnabled: true

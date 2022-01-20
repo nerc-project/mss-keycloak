@@ -4,7 +4,9 @@ resources:
   - ha-postgres.yaml
   - ../../base
   - keycloakrealm.yaml
-  - regapp-client.yaml
+  - clients/regapp.yaml
+  - clients/coldfront.yaml
+  - clients/openstack.yaml
   - secrets/keycloak-tls.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
@@ -14,8 +16,8 @@ patchesStrategicMerge:
 
 generatorOptions:
   disableNameSuffixHash: true
-  
+
 configMapGenerator:
-  - name: regapp-client-script
+  - name: nerc-setup.sh
     files:
-    - regapp-client-script.sh
+    - nerc-setup.sh
