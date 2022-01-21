@@ -35,6 +35,9 @@ spec:
         repo2-s3-uri-style: path
       repos:
       - name: repo1
+        schedules:
+          full: "0 1 * * *"
+          incremental: "0 */4 * * *"
         volume:
           volumeClaimSpec:
             accessModes:
@@ -43,6 +46,9 @@ spec:
               requests:
                 storage: 5Gi
       - name: repo2
+        schedules:
+          full: "0 1 * * *"
+          incremental: "0 */4 * * *"
         s3:
           bucket: "nerc-shift-1-backups"
           endpoint: "holecs.rc.fas.harvard.edu"
