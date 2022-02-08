@@ -32,6 +32,7 @@ spec:
           name: pgo-s3-conf
       global:
         repo2-path: /pgbackrest/postgres-operator/mss-keycloak-pgha/repo2
+        repo2-s3-uri-style: path
       repos:
       - name: repo1
         volume:
