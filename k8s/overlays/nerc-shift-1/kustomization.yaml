@@ -1,6 +1,7 @@
 namespace: keycloak
 resources:
   - secrets/pgo-s3-conf.yaml
+  - secrets/pgo-pgbackrest-secrets.yaml
   - ha-postgres.yaml
   - ../../base
   - keycloakrealm.yaml
