@@ -37,6 +37,8 @@ spec:
         #repo2-cipher-type: aes-256-cbc
         repo2-path: /pgbackrest/postgres-operator/mss-keycloak-pgha/repo2
         repo2-s3-uri-style: path
+        repo1-retention-full: "30"
+        repo2-retention-full: "30"
       manual:
         repoName: repo2
         options:
