@@ -3,12 +3,16 @@ resources:
 
 patches:
   # Use the letsencrypt staging issuer
-  - path: patches/ingress-cert-manager-staging.yaml
-    target:
-      kind: Ingress
-      name: keycloak
+  # - path: patches/ingress-cert-manager-staging.yaml
+  #   target:
+  #     kind: Ingress
+  #     name: keycloak
   # Rename the host to keycloakdev.mss.mghpcc.org
   - path: patches/ingress-host-keycloakdev.yaml
     target:
       kind: Ingress
       name: keycloak
+
+patchesStrategicMerge:
+  - patches/clients-regapp.yaml
+  - patches/clients-coldfront.yaml
