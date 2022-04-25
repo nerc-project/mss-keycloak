@@ -1,0 +1,10 @@
+---
+- op: replace
+  path: /spec/rules/0/host
+  value: keycloakdev.mss.mghpcc.org
+- op: replace
+  path: /spec/tls/0
+  value:
+    hosts:
+      - keycloakdev.mss.mghpcc.org
+    secretName: keycloakdev-tls

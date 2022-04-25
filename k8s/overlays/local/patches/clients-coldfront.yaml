@@ -1,0 +1,8 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: coldfront-client
+spec:
+  client:
+    redirectUris:
+    - https://coldfrontdev.mss.mghpcc.org/*

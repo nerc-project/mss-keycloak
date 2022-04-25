@@ -1,0 +1,8 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: regapp-client
+spec:
+  client:
+    redirectUris:
+    - https://regappdev.mss.mghpcc.org/*
