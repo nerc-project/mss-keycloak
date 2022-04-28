@@ -8,7 +8,6 @@ resources:
   - clients/regapp.yaml
   - clients/coldfront.yaml
   - clients/openstack.yaml
-  - secrets/keycloak-tls.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
