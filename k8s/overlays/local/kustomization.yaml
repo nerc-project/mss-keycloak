@@ -12,7 +12,11 @@ patches:
     target:
       kind: Ingress
       name: keycloak
+  - path: patches/ha-postgres.yaml
+    target:
+      kind: PostgresCluster
 
 patchesStrategicMerge:
   - patches/clients-regapp.yaml
   - patches/clients-coldfront.yaml
+
