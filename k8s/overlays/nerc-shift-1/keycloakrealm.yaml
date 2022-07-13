@@ -17,7 +17,7 @@ spec:
     - alias: cilogon
       config:
         allowedClockSkew: "5"
-        authorizationUrl: https://cilogon.org/authorize?idphint=urn%3Amace%3Aincommon%3Amit.edu,https%3A%2F%2Ffed.huit.harvard.edu%2Fidp%2Fshibboleth,https%3A%2F%2Fshib.bu.edu%2Fidp%2Fshibboleth,https%3A%2F%2Fidp.xsede.org%2Fidp%2Fshibboleth
+        authorizationUrl: https://cilogon.org/authorize?idphint=urn%3Amace%3Aincommon%3Amit.edu,https%3A%2F%2Ffed.huit.harvard.edu%2Fidp%2Fshibboleth,https%3A%2F%2Fshib.bu.edu%2Fidp%2Fshibboleth,https%3A%2F%2Flogin.microsoftonline.com%2Fcommon%2Foauth2%2Fv2.0%2Fauthorize
         clientAuthMethod: client_secret_post
         clientId: "cilogon:/client_id/ab05912d88d9f9cc5ea155accf420f3"
         clientSecret: ${vault.cilogon_client_secret}  # pragma: allowlist secret
