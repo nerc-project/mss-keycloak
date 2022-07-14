@@ -7,4 +7,4 @@
   value:
     hosts:
       - keycloakdev.mss.mghpcc.org
-    secretName: keycloakdev-tls
+    secretName: keycloakdev-tls  # pragma: allowlist secret

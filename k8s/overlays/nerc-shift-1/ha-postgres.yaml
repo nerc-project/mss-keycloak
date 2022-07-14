@@ -30,11 +30,11 @@ spec:
       configuration:
       - secret:
           name: pgo-s3-conf
-      #- secret:
-      #    name: pgo-pgbackrest-secrets
+      # - secret:
+      #     name: pgo-pgbackrest-secrets
       global:
-        #repo1-cipher-type: aes-256-cbc
-        #repo2-cipher-type: aes-256-cbc
+        # repo1-cipher-type: aes-256-cbc
+        # repo2-cipher-type: aes-256-cbc
         repo2-path: /pgbackrest/postgres-operator/mss-keycloak-pgha/repo2
         repo2-s3-uri-style: path
         repo1-retention-full: "30"
@@ -42,7 +42,7 @@ spec:
       manual:
         repoName: repo2
         options:
-         - --type=full
+          - --type=full
       repos:
       - name: repo1
         schedules:
