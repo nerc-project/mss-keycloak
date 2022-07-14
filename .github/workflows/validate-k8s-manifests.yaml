@@ -1,0 +1,38 @@
+name: Validate K8s Manifests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  validate-k8s-manifests:
+    runs-on: ubuntu-latest
+    env:
+      KUSTOMIZE_VERSION: 4.3.0
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Configure caching
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/bin
+          key: kustomize-${{ runner.os }}-${{ env.KUSTOMIZE_VERSION }}
+
+      - name: Install kustomize
+        run: |
+          if ! [ -f "$HOME/.cache/bin/kustomize" ]; then
+            echo "Installing kustomize"
+            mkdir -p $HOME/.cache/bin
+            export PATH=$HOME/.cache/bin:$PATH
+            curl -Lsf -o kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz
+            tar -C $HOME/.cache/bin -xf kustomize.tar.gz
+          else
+            echo "Using kustomize from cache"
+          fi
+
+      - name: Run kustomize build
+        run: |
+          ./ci-scripts/run-kustomize-build.sh
