@@ -1,0 +1,7 @@
+[
+  {
+    "op": "replace",
+    "path": "/spec/realm/identityProviders/0/config/authorizationUrl",
+    "value": "https://cilogon.org/authorize?idphint=urn%3Amace%3Aincommon%3Amit.edu,https%3A%2F%2Ffed.huit.harvard.edu%2Fidp%2Fshibboleth,https%3A%2F%2Fshib.bu.edu%2Fidp%2Fshibboleth,https%3A%2F%2Flogin.microsoftonline.com%2Fcommon%2Foauth2%2Fv2.0%2Fauthorize"
+  }
+]

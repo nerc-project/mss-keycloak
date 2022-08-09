@@ -40,17 +40,14 @@ spec:
         repo1-retention-full: "30"
         repo2-retention-full: "30"
       manual:
-        # repoName: repo2
-        repoName: repo1
+        repoName: repo2
         options:
          - --type=full
-      # configuration:
-      # - secret:
-      #     name: pgo-s3-conf
-      global:
-        repo2-path: /pgbackrest/postgres-operator/mss-keycloak-pgha/repo2
       repos:
       - name: repo1
+        schedules:
+          full: "0 1 * * *"
+          incremental: "0 */4 * * *"
         volume:
           volumeClaimSpec:
             accessModes:
@@ -59,12 +56,13 @@ spec:
               requests:
                 storage: 5Gi
       - name: repo2
+        schedules:
+          full: "0 1 * * *"
+          incremental: "0 */4 * * *"
         s3:
           bucket: "nerc-shift-1-backups"
-          endpoint: "mghp.osn.xsede.org"
-          # endpoint: "holecs.rc.fas.harvard.edu"
+          endpoint: "holecs.rc.fas.harvard.edu"
           region: "us-east-1"
-
   proxy:
     pgBouncer:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:centos8-1.15-3
