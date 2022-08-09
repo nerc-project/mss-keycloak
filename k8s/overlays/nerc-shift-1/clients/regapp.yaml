@@ -8,6 +8,27 @@ spec:
   realmSelector:
     matchLabels:
       realm: mss
+  serviceAccountClientRoles:
+    realm-management:
+      - create-client
+      - manage-identity-providers
+      - view-realm
+      - view-users
+      - query-users
+      - view-clients
+      - query-groups
+      - manage-clients
+      - manage-events
+      - impersonation
+      - view-authorization
+      - manage-users
+      - query-realms
+      - manage-realm
+      - view-identity-providers
+      - view-events
+      - realm-admin
+      - manage-authorization
+      - query-clients
   client:
     attributes:
       access.token.lifespan: "60"

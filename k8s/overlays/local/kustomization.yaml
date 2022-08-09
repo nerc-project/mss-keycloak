@@ -12,7 +12,13 @@ patches:
     target:
       kind: Ingress
       name: keycloak
+  - path: patches/realm-authurl.json
+    target:
+      kind: KeycloakRealm
+      name: mss
 
 patchesStrategicMerge:
   - patches/clients-regapp.yaml
   - patches/clients-coldfront.yaml
+  - patches/idp-cilogon.yaml
+  - patches/ha-postgres.yaml

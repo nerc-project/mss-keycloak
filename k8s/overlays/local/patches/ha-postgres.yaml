@@ -1,0 +1,22 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: mss-keycloak-pgha
+spec:
+  backups:
+    pgbackrest:
+      configuration:
+      global:
+        $patch: replace
+        repo1-retention-full: "30"
+      manual:
+        repoName: repo1
+      repos:
+      - name: repo1
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 5Gi
