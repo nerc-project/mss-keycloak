@@ -30,15 +30,6 @@ function wait_for_realm_and_client() {
 }
 
 function setup_regapp() {
-  CLIENT_ID=$1
-
-  # Add all realm management roles (mappings) to client service account
-  CLIENT_KCID=$(kcadm get realms/${REALM}/clients -q clientId=$CLIENT_ID --fields id --format csv --noquotes)
-  SVC_ACCT_USER_KCID=$(kcadm get realms/${REALM}/clients/$CLIENT_KCID/service-account-user --fields id --format csv --noquotes)
-  REALM_MGMT_CLIENT_KCID=$(kcadm get realms/${REALM}/clients -q clientId=realm-management --fields id --format csv --noquotes)
-  ALLROLES=$(kcadm get realms/${REALM}/clients/${REALM_MGMT_CLIENT_KCID}/roles --fields id,name)
-  kcadm create realms/${REALM}/users/${SVC_ACCT_USER_KCID}/role-mappings/clients/${REALM_MGMT_CLIENT_KCID} --body "$ALLROLES"
-
   # Add the idp mapper for cilogon
   kcadm create realms/${REALM}/identity-provider/instances/cilogon/mappers --body "$IDP_MAPPER_CONFIG"
 
