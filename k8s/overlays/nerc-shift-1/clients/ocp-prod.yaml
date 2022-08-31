@@ -102,5 +102,8 @@ spec:
     publicClient: false
     redirectUris:
     - https://console-openshift-console.apps.nerc-ocp-prod.rc.fas.harvard.edu/*
+    - https://oauth-openshift.apps.nerc-ocp-prod.rc.fas.harvard.edu/*
+    - https://console-openshift-console.apps.shift.nerc.mghpcc.org/*
+    - https://oauth-openshift.apps.shift.nerc.mghpcc.org/*
     serviceAccountsEnabled: true
     standardFlowEnabled: true
