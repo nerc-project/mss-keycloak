@@ -73,6 +73,16 @@ spec:
       protocol: openid-connect
       protocolMapper: oidc-usermodel-property-mapper
     - config:
+        access.token.claim: "false"
+        claim.name: sub
+        id.token.claim: "true"
+        jsonType.label: String
+        user.attribute: username
+        userinfo.token.claim: "true"
+      name: sub
+      protocol: openid-connect
+      protocolMapper: oidc-usermodel-property-mapper
+    - config:
         access.token.claim: "true"
         claim.name: clientHost
         id.token.claim: "true"
