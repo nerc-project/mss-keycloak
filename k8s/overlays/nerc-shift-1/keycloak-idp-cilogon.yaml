@@ -1,5 +1,5 @@
 ---
-apiVersion: external-secrets.io/v1alpha1
+apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: keycloak-cilogon-idp-secret
@@ -12,4 +12,5 @@ spec:
     name: vault-backend
     kind: ClusterSecretStore
   dataFrom:
-    - key: keycloak/idp/cilogon
+    -extract:
+      key: keycloak/idp/cilogon
