@@ -12,5 +12,5 @@ spec:
     name: vault-backend
     kind: ClusterSecretStore
   dataFrom:
-    -extract:
-      key: keycloak/idp/cilogon
+    - extract:
+        key: keycloak/idp/cilogon
