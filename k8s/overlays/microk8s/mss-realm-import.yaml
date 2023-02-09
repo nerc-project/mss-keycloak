@@ -56,7 +56,7 @@ spec:
         enabled: true
         alwaysDisplayInConsole: false
         clientAuthenticatorType: client-secret
-        secret: 'badsecret'
+        secret: 'badsecret'  # pragma: allowlist secret
         redirectUris:
           - https://regapp.mss.mghpcc.org/*
           - https://regappdev.mss.mghpcc.org/*
