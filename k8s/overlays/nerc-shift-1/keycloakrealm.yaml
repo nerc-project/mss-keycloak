@@ -26,7 +26,8 @@ spec:
           https%3A%2F%2Fidp.umassd.edu%2Fidp%2Fshibboleth,\
           https%3A%2F%2Fshibboleth.umassmed.edu%2Fidp%2Fshibboleth,\
           https%3A%2F%2Fneuidmsso.neu.edu%2Fidp%2Fshibboleth,\
-          https%3A%2F%2Flogin.microsoftonline.com%2Fcommon%2Foauth2%2Fv2.0%2Fauthorize"
+          https%3A%2F%2Flogin.microsoftonline.com%2Fcommon%2Foauth2%2Fv2.0%2Fauthorize,\
+          https%3A%2F%2Fsso.uri.edu%2Fidp"
         clientAuthMethod: client_secret_post
         clientId: "cilogon:/client_id/ab05912d88d9f9cc5ea155accf420f3"
         clientSecret: ${vault.cilogon_client_secret}  # pragma: allowlist secret
