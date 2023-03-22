@@ -142,5 +142,6 @@ spec:
     publicClient: false
     redirectUris:
     - https://coldfront.mss.mghpcc.org/*
+    - https://coldfront-staging.mss.mghpcc.org/*
     serviceAccountsEnabled: true
     standardFlowEnabled: true
