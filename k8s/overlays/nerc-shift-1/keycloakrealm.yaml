@@ -26,6 +26,7 @@ spec:
           https%3A%2F%2Fidp.umassd.edu%2Fidp%2Fshibboleth,\
           https%3A%2F%2Fshibboleth.umassmed.edu%2Fidp%2Fshibboleth,\
           https%3A%2F%2Fneuidmsso.neu.edu%2Fidp%2Fshibboleth,\
+          https%3A%2F%2Fsso.uri.edu%2Fidp,\
           https%3A%2F%2Fidp.wpi.edu%2Fidp%2Fshibboleth,\
           http%3A%2F%2Fgoogle.com%2Faccounts%2Fo8%2Fid,\
           https%3A%2F%2Flogin.microsoftonline.com%2Fcommon%2Foauth2%2Fv2.0%2Fauthorize"

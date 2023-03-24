@@ -105,6 +105,16 @@ spec:
       protocolMapper: oidc-usermodel-attribute-mapper
     - config:
         access.token.claim: "true"
+        claim.name: accepted_terms
+        id.token.claim: "true"
+        jsonType.label: String
+        user.attribute: accepted_terms
+        userinfo.token.claim: "true"
+      name: accepted_terms
+      protocol: openid-connect
+      protocolMapper: oidc-usermodel-attribute-mapper
+    - config:
+        access.token.claim: "true"
         claim.name: clientHost
         id.token.claim: "true"
         jsonType.label: String
