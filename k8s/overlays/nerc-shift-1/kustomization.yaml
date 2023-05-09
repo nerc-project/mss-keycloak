@@ -9,6 +9,7 @@ resources:
   - clients/coldfront.yaml
   - clients/ocp-prod.yaml
   - clients/openstack.yaml
+  - clients/xdmod.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
