@@ -43,7 +43,7 @@ spec:
     directAccessGrantsEnabled: false
     enabled: true
     fullScopeAllowed: true
-    implicitFlowEnabled: false
+    implicitFlowEnabled: true
     nodeReRegistrationTimeout: -1
     optionalClientScopes:
     - address
