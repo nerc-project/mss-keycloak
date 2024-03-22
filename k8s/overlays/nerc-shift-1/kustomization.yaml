@@ -10,6 +10,7 @@ resources:
   - clients/ocp-prod.yaml
   - clients/openstack.yaml
   - clients/xdmod.yaml
+  - clients/esi.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
