@@ -11,6 +11,7 @@ resources:
   - clients/openstack.yaml
   - clients/xdmod.yaml
   - clients/esi.yaml
+  - clients/rhoai-test.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
