@@ -1,0 +1,118 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: rhoai-test-client
+  labels:
+    client: rhoai-test-client
+spec:
+  realmSelector:
+    matchLabels:
+      realm: mss
+  client:
+    attributes:
+      access.token.lifespan: "60"
+      backchannel.logout.revoke.offline.tokens: "false"
+      backchannel.logout.session.required: "true"
+      client_credentials.use_refresh_token: "false"
+      display.on.consent.screen: "false"
+      exclude.session.state.from.auth.response: "false"
+      id.token.as.detached.signature: "false"
+      oauth2.device.authorization.grant.enabled: "false"
+      oidc.ciba.grant.enabled: "false"
+      require.pushed.authorization.requests: "false"
+      saml.artifact.binding: "false"
+      saml.assertion.signature: "false"
+      saml.authnstatement: "false"
+      saml.client.signature: "false"
+      saml.encrypt: "false"
+      saml.force.post.binding: "false"
+      saml.multivalued.roles: "false"
+      saml.onetimeuse.condition: "false"
+      saml.server.signature: "false"
+      saml.server.signature.keyinfo.ext: "false"
+      saml_force_name_id_format: "false"
+      tls.client.certificate.bound.access.tokens: "false"
+      use.refresh.tokens: "true"
+    clientAuthenticatorType: client-secret
+    clientId: rhoai-test
+    defaultClientScopes:
+    - web-origins
+    - roles
+    - profile
+    - email
+    directAccessGrantsEnabled: false
+    enabled: true
+    fullScopeAllowed: true
+    implicitFlowEnabled: false
+    nodeReRegistrationTimeout: -1
+    optionalClientScopes:
+    - address
+    - phone
+    - offline_access
+    - microprofile-jwt
+    protocol: openid-connect
+    protocolMappers:
+    - config:
+        access.token.claim: "false"
+        claim.name: cilogon_idp_name
+        id.token.claim: "true"
+        jsonType.label: String
+        user.attribute: cilogon_idp_name
+        userinfo.token.claim: "true"
+      name: cilogon_idp_name
+      protocol: openid-connect
+      protocolMapper: oidc-usermodel-attribute-mapper
+    - config:
+        access.token.claim: "false"
+        claim.name: preferred_username
+        id.token.claim: "true"
+        jsonType.label: String
+        user.attribute: username
+        userinfo.token.claim: "true"
+      name: username
+      protocol: openid-connect
+      protocolMapper: oidc-usermodel-property-mapper
+    - config:
+        access.token.claim: "false"
+        claim.name: sub
+        id.token.claim: "true"
+        jsonType.label: String
+        user.attribute: username
+        userinfo.token.claim: "true"
+      name: sub
+      protocol: openid-connect
+      protocolMapper: oidc-usermodel-property-mapper
+    - config:
+        access.token.claim: "true"
+        claim.name: clientHost
+        id.token.claim: "true"
+        jsonType.label: String
+        user.session.note: clientHost
+      name: Client Host
+      protocol: openid-connect
+      protocolMapper: oidc-usersessionmodel-note-mapper
+    - config:
+        access.token.claim: "true"
+        claim.name: clientAddress
+        id.token.claim: "true"
+        jsonType.label: String
+        user.session.note: clientAddress
+      name: Client IP Address
+      protocol: openid-connect
+      protocolMapper: oidc-usersessionmodel-note-mapper
+    - config:
+        access.token.claim: "true"
+        claim.name: clientId
+        id.token.claim: "true"
+        jsonType.label: String
+        user.session.note: clientId
+      name: Client ID
+      protocol: openid-connect
+      protocolMapper: oidc-usersessionmodel-note-mapper
+    publicClient: false
+    webOrigins:
+    - https://console-openshift-console.apps.rhoai-test.nerc.mghpcc.org
+    redirectUris:
+    - https://oauth-openshift.apps.rhoai-test.nerc.mghpcc.org/*
+    serviceAccountsEnabled: false
+    standardFlowEnabled: true
