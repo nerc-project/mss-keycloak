@@ -12,6 +12,7 @@ resources:
   - clients/xdmod.yaml
   - clients/esi.yaml
   - clients/rhoai-test.yaml
+  - clients/ocp-virt.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
