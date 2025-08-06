@@ -13,6 +13,7 @@ resources:
   - clients/esi.yaml
   - clients/rhoai-test.yaml
   - clients/ocp-virt.yaml
+  - clients/ocp-edu.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
