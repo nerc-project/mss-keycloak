@@ -17,6 +17,14 @@ resources:
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
+patches:
+  - target:
+      group: external-secrets.io
+      version: v1beta1
+      kind: ExternalSecret
+      name: '.*'
+    path: patches/external_secrets_api_version.yaml
+
 patchesStrategicMerge:
   - patches/keycloak.yaml
 

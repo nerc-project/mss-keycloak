@@ -1,0 +1,248 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: KeycloakRealmImport
+metadata:
+  name: mss-nerc-keycloak-realm
+  namespace: keycloak
+spec:
+  keycloakCRName: mss-keycloak
+  realm:
+    id: mss
+    realm: mss
+    enabled: true
+    displayName: MSS
+    editUsernameAllowed: false
+    registrationAllowed: false
+    rememberMe: false
+    resetPasswordAllowed: false
+    sslRequired: external
+    userManagedAccessAllowed: false
+    verifyEmail: false
+    users:
+      - username: service-account-mss-nerc
+        enabled: true
+        totp: false
+        emailVerified: false
+        serviceAccountClientId: regapp
+        disableableCredentialTypes: []
+        requiredActions: []
+        realmRoles:
+          - default-roles-mss
+        clientRoles:
+          realm-management:
+            - create-client
+            - manage-identity-providers
+            - view-realm
+            - view-users
+            - query-users
+            - view-clients
+            - query-groups
+            - manage-clients
+            - manage-events
+            - impersonation
+            - view-authorization
+            - manage-users
+            - query-realms
+            - manage-realm
+            - view-identity-providers
+            - view-events
+            - realm-admin
+            - manage-authorization
+            - query-clients
+        notBefore: 0
+        groups: []
+    clients:
+      - clientId: regapp
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        secret: 'badsecret'  # pragma: allowlist secret
+        redirectUris:
+          - https://regapp.mss.mghpcc.org/*
+          - https://regappdev.mss.mghpcc.org/*
+        webOrigins: []
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: true
+        serviceAccountsEnabled: true
+        publicClient: false
+        frontchannelLogout: false
+        protocol: openid-connect
+        attributes:
+          access.token.lifespan: "60"
+          backchannel.logout.revoke.offline.tokens: "false"
+          backchannel.logout.session.required: "true"
+          client_credentials.use_refresh_token: "false"
+          display.on.consent.screen: "false"
+          exclude.session.state.from.auth.response: "false"
+          id.token.as.detached.signature: "false"
+          oauth2.device.authorization.grant.enabled: "false"
+          oidc.ciba.grant.enabled: "false"
+          require.pushed.authorization.requests: "false"
+          # login_theme: mghpcc
+          tls.client.certificate.bound.access.tokens: "false"
+          use.refresh.tokens: "true"
+        authenticationFlowBindingOverrides: {}
+        fullScopeAllowed: true
+        nodeReRegistrationTimeout: -1
+        protocolMappers:
+          - config:
+              access.token.claim: "false"
+              claim.name: cilogon_idp_name
+              id.token.claim: "true"
+              jsonType.label: String
+              user.attribute: cilogon_idp_name
+              userinfo.token.claim: "true"
+            name: cilogon_idp_name
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+          - config:
+              access.token.claim: "false"
+              claim.name: preferred_username
+              id.token.claim: "true"
+              jsonType.label: String
+              user.attribute: username
+              userinfo.token.claim: "true"
+            name: username
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-property-mapper
+          - config:
+              access.token.claim: "true"
+              claim.name: accepted_terms
+              id.token.claim: "true"
+              jsonType.label: String
+              user.attribute: accepted_terms
+              userinfo.token.claim: "true"
+            name: accepted_terms
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+          - config:
+              access.token.claim: "true"
+              claim.name: mss_research_domain
+              id.token.claim: "true"
+              jsonType.label: String
+              user.attribute: mss_research_domain
+              userinfo.token.claim: "true"
+            name: mss_research_domain
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+          - config:
+              access.token.claim: "true"
+              claim.name: clientHost
+              id.token.claim: "true"
+              jsonType.label: String
+              user.session.note: clientHost
+            name: Client Host
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+          - config:
+              access.token.claim: "true"
+              claim.name: clientAddress
+              id.token.claim: "true"
+              jsonType.label: String
+              user.session.note: clientAddress
+            name: Client IP Address
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+          - config:
+              access.token.claim: "true"
+              claim.name: clientId
+              id.token.claim: "true"
+              jsonType.label: String
+              user.session.note: clientId
+            name: Client ID
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+        defaultClientScopes:
+          - web-origins
+          - roles
+          - profile
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - offline_access
+          - microprofile-jwt
+    identityProviders:
+      - alias: cilogon
+        displayName: cilogon
+        providerId: oidc
+        enabled: true
+        trustEmail: true
+        # firstBrokerLoginFlowAlias: browser-nerc
+        firstBrokerLoginFlowAlias: browser
+        config:
+          acceptsPromptNoneForwardFromClient: "true"
+          clientId: "cilogon:/client_id/ab05912d88d9f9cc5ea155accf420f3"
+          tokenUrl: https://cilogon.org/oauth2/token
+          authorizationUrl: "https://cilogon.org/authorize?idphint=\
+            https%3A%2F%2Ffed.huit.harvard.edu%2Fidp%2Fshibboleth,\
+            https%3A%2F%2Fshib.bu.edu%2Fidp%2Fshibboleth,\
+            urn%3Amace%3Aincommon%3Amit.edu,\
+            https%3A%2F%2Fwebauth.umass.edu%2Fidp%2Fshibboleth,\
+            https%3A%2F%2Fvm-shibboleth.umb.edu%2Fidp%2Fshibboleth,\
+            https%3A%2F%2Fidp.umassd.edu%2Fidp%2Fshibboleth,\
+            https%3A%2F%2Fshibboleth.umassmed.edu%2Fidp%2Fshibboleth,\
+            https%3A%2F%2Fneuidmsso.neu.edu%2Fidp%2Fshibboleth,\
+            https%3A%2F%2Fidp.wpi.edu%2Fidp%2Fshibboleth,\
+            http%3A%2F%2Fgoogle.com%2Faccounts%2Fo8%2Fid,\
+            https%3A%2F%2Flogin.microsoftonline.com%2Fcommon%2Foauth2%2Fv2.0%2Fauthorize"
+          clientAuthMethod: client_secret_post
+          syncMode: IMPORT
+          clientSecret: ${vault.cilogon_client_secret}
+          allowedClockSkew: "5"
+          defaultScope: openid email profile org.cilogon.userinfo
+          useJwksUrl: "true"
+    identityProviderMappers:
+    - name: cilogon_idp_name
+      identityProviderAlias: cilogon
+      identityProviderMapper: oidc-user-attribute-idp-mapper
+      config:
+        syncMode: IMPORT
+        claim: idp_name
+        user.attribute: cilogon_idp_name
+    # authenticationFlows:
+    #   - alias: browser
+    #     description: browser based authentication for NERC
+    #     providerId: basic-flow
+    #     topLevel: true
+    #     builtIn: true
+    #     authenticationExecutions:
+    #       - authenticator: auth-cookie
+    #         authenticatorFlow: false
+    #         autheticatorFlow: false
+    #         requirement: ALTERNATIVE
+    #         priority: 10
+    #         userSetupAllowed: false
+    #       - authenticator: auth-spnego
+    #         authenticatorFlow: false
+    #         autheticatorFlow: false
+    #         requirement: DISABLED
+    #         priority: 20
+    #         userSetupAllowed: false
+    #       - authenticatorConfig: cilogon_auth_config
+    #         authenticator: identity-provider-redirector
+    #         authenticatorFlow: false
+    #         autheticatorFlow: false
+    #         requirement: ALTERNATIVE
+    #         priority: 25
+    #         userSetupAllowed: false
+    #       - authenticatorFlow: true
+    #         autheticatorFlow: true
+    #         requirement: ALTERNATIVE
+    #         priority: 30
+    #         flowAlias: forms
+    #         userSetupAllowed: false
+    authenticatorConfig:
+      - alias: cilogon_auth_config
+        config:
+          defaultProvider: cilogon
+    browserFlow: browser
+    registrationFlow: registration
+    directGrantFlow: direct grant
+    resetCredentialsFlow: reset credentials
+    clientAuthenticationFlow: clients
+    dockerAuthenticationFlow: docker auth
