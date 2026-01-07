@@ -1,0 +1,101 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: ai-telemetry
+  labels:
+    client: ai-telemetry
+spec:
+  realmSelector:
+    matchLabels:
+      realm: mss
+  client:
+    clientId: ai-telemetry
+    name: ""
+    description: ""
+    rootUrl: ""
+    adminUrl: ""
+    baseUrl: ""
+    surrogateAuthRequired: false
+    enabled: true
+    alwaysDisplayInConsole: false
+    clientAuthenticatorType: client-secret
+    redirectUris:
+    - https://keycloak.apps.obs.nerc.mghpcc.org/realms/NERC/broker/keycloak-oidc/endpoint
+    webOrigins: []
+    notBefore: 0
+    bearerOnly: false
+    consentRequired: false
+    standardFlowEnabled: true
+    implicitFlowEnabled: true
+    directAccessGrantsEnabled: true
+    serviceAccountsEnabled: true
+    publicClient: false
+    frontchannelLogout: true
+    protocol: openid-connect
+    attributes:
+      oidc.ciba.grant.enabled: "false"
+      client.secret.creation.time: "1739990732"
+      backchannel.logout.session.required: "true"
+      oauth2.device.authorization.grant.enabled: "false"
+      display.on.consent.screen: "false"
+      backchannel.logout.revoke.offline.tokens: "false"
+    authenticationFlowBindingOverrides: {}
+    fullScopeAllowed: true
+    nodeReRegistrationTimeout: -1
+    protocolMappers:
+      - name: username
+        protocol: openid-connect
+        protocolMapper: oidc-usermodel-property-mapper
+        consentRequired: false
+        config:
+          userinfo.token.claim: "true"
+          user.attribute: username
+          id.token.claim: "true"
+          access.token.claim: "true"
+          claim.name: uid
+          jsonType.label: String
+      - name: Client Host
+        protocol: openid-connect
+        protocolMapper: oidc-usersessionmodel-note-mapper
+        consentRequired: false
+        config:
+          user.session.note: clientHost
+          id.token.claim: "true"
+          access.token.claim: "true"
+          claim.name: clientHost
+          jsonType.label: String
+      - name: Client IP Address
+        protocol: openid-connect
+        protocolMapper: oidc-usersessionmodel-note-mapper
+        consentRequired: false
+        config:
+          user.session.note: clientAddress
+          id.token.claim: "true"
+          access.token.claim: "true"
+          claim.name: clientAddress
+          jsonType.label: String
+      - name: Client ID
+        protocol: openid-connect
+        protocolMapper: oidc-usersessionmodel-note-mapper
+        consentRequired: false
+        config:
+          user.session.note: clientId
+          id.token.claim: "true"
+          access.token.claim: "true"
+          claim.name: clientId
+          jsonType.label: String
+    defaultClientScopes:
+      - web-origins
+      - acr
+      - profile
+      - roles
+      - email
+    optionalClientScopes:
+      - address
+      - phone
+      - offline_access
+      - microprofile-jwt
+    access:
+      view: true
+      configure: true
+      manage: true
