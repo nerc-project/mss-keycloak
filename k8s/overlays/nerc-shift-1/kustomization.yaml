@@ -14,6 +14,7 @@ resources:
   - clients/rhoai-test.yaml
   - clients/ocp-virt.yaml
   - clients/ocp-edu.yaml
+  - clients/ai-telemetry.yaml
   - keycloak-idp-cilogon.yaml
   - ingress.yaml
 
