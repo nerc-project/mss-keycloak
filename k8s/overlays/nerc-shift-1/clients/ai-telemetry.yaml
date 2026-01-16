@@ -21,6 +21,7 @@ spec:
     clientAuthenticatorType: client-secret
     redirectUris:
     - https://keycloak.apps.obs.nerc.mghpcc.org/realms/NERC/broker/keycloak-oidc/endpoint
+    - https://keycloak.apps.obs.nerc.mghpcc.org/realms/NERC/broker/keycloak-oidc/endpoint/logout_response
     webOrigins: []
     notBefore: 0
     bearerOnly: false
