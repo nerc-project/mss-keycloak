@@ -21,7 +21,6 @@ spec:
     clientAuthenticatorType: client-secret
     redirectUris:
     - https://keycloak.apps.obs.nerc.mghpcc.org/realms/NERC/broker/keycloak-oidc/endpoint
-    - https://keycloak.apps.obs.nerc.mghpcc.org/realms/NERC/broker/keycloak-oidc/endpoint/logout_response
     webOrigins: []
     notBefore: 0
     bearerOnly: false
@@ -40,6 +39,7 @@ spec:
       oauth2.device.authorization.grant.enabled: "false"
       display.on.consent.screen: "false"
       backchannel.logout.revoke.offline.tokens: "false"
+      post.logout.redirect.uris: "https://keycloak.apps.obs.nerc.mghpcc.org/realms/NERC/broker/keycloak-oidc/endpoint/logout_response"
     authenticationFlowBindingOverrides: {}
     fullScopeAllowed: true
     nodeReRegistrationTimeout: -1
