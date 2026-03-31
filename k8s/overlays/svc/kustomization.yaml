@@ -1,0 +1,4 @@
+namespace: keycloak
+resources:
+  - ha-postgres.yaml
+  - keycloak.yaml

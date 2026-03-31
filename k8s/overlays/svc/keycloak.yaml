@@ -1,0 +1,48 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: mss-keycloak
+  namespace: keycloak
+  labels:
+    app: mss-keycloak
+spec:
+  # Use the operator-managed Keycloak Deployment
+  instances: 2
+
+  hostname:
+    hostname: keycloak.apps.svc.nerc.mghpcc.org
+
+  http:
+    httpEnabled: true
+    #tlsSecret: keycloak-tls-secret
+
+  proxy:
+    headers: xforwarded
+
+  # IMPORTANT: Use external DB (Crunchy Postgres) instead of embedded dev DB
+  db:
+    vendor: postgres
+    # JDBC URL pointing to the Crunchy Postgres primary service
+    # Replace host/port/dbname with your values
+    # Typical Crunchy pattern: <cluster>-primary.<ns>.svc.cluster.local
+    # or just the service name if in same namespace.
+    host: keycloak-primary
+    port: 5432
+    database: keycloak
+
+    # Credentials from the Crunchy Postgres user Secret
+    usernameSecret:
+      name: keycloak-pguser-keycloak
+      key: user
+    passwordSecret:
+      name: keycloak-pguser-keycloak
+      key: password
+
+  # Optional: resources for Keycloak pods
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
